@@ -8,6 +8,7 @@ def get_dac_state_as_array():
 
 # --- Visualization Functions ---
 
+
 def prepare_fig_4p():
     """
     Prepare a 4-panel plot for live training visualization.
