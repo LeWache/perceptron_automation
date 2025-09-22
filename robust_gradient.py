@@ -1,5 +1,6 @@
 import numpy as np
 from numpy import polyfit
+from utilities import get_roles
 
 
 def estimate_background_gradient(x, y, min_segment_size=10, gap_width=5, slope_tolerance=0.0002):
@@ -38,3 +39,19 @@ def estimate_background_gradient(x, y, min_segment_size=10, gap_width=5, slope_t
         best_slope, _ = np.polyfit(x, y, 1)
 
     return best_slope
+
+def get_gradient_from_handler(handler, n=2):
+    metadata = handler.metadata
+    roles = get_roles(metadata)
+    x_param = roles.get('set')
+    y_param = roles.get('measured')
+
+    x_data = getattr(handler, x_param)
+    y_data = getattr(handler, y_param)
+
+    gradient = estimate_background_gradient(x_data, y_data)
+
+    return gradient
+
+def get_coupling_from_handlers(handler1, handler2):
+    return get_gradient_from_handler(handler1) / get_gradient_from_handler(handler2)

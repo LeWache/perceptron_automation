@@ -154,7 +154,7 @@ def get_peak_and_sweep(handler, filter = 0.75, points = 100, filter_subplot= 0.6
         dac.dac26(y)
         dac.dac24()
         detuning = get_vector()
-        current[i] = station.do1d(detuning, -50, 50, points, rigol.do0d, close_when_done=True).rigol_voltage
+        current[i] = do1d(detuning, -50, 50, points, rigol.do0d, close_when_done=True).rigol_voltage
         detuning(0)
     return current
 

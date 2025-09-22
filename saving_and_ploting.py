@@ -1,3 +1,8 @@
+import os
+import numpy as np
+
+
+
 def get_dac_state_as_array():
     string_dac = np.empty(48, dtype='U32')
     for i in range(1,49):
